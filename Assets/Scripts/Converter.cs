@@ -1,28 +1,13 @@
 ﻿public class Converter 
 {
-	public class FormattedTime
-	{
-		private string timeStr;
-
-		public FormattedTime (string timeStr)
-		{
-			this.timeStr = timeStr;
-		}
-
-		public bool IsValidFormat ()
-		{
-			string[] timeSegments = timeStr.Split (':');
-			return timeSegments.Length == 3;
-		}
-	}
-
 	public BerlinTime ToBerlinFormat (string timeStr)
 	{
-		bool isValid = ValidateTime (timeStr);
+		FormattedTime formattedTime = new FormattedTime (timeStr);
+		bool isValid = ValidateTime (formattedTime);
 
 		if (isValid)
 		{
-			return new BerlinTime ();
+			return new BerlinTime (formattedTime);
 		}
 		else
 		{
@@ -30,10 +15,9 @@
 		}
 	}
 
-	private bool ValidateTime (string timeStr)
+	private bool ValidateTime (FormattedTime t)
 	{
 		bool isValid = true;
-		FormattedTime t = new FormattedTime (timeStr);
 
 		if (!t.IsValidFormat ())
 		{
@@ -45,3 +29,26 @@
 	}
 }
 
+public class FormattedTime
+{
+	private const int SECONDS = 2;
+
+	private string timeStr;
+	private string[] timeSegments;
+
+	public string Seconds 
+	{
+		get { return timeSegments [SECONDS]; }
+	}
+	
+	public FormattedTime (string timeStr)
+	{
+		this.timeStr = timeStr;
+	}
+	
+	public bool IsValidFormat ()
+	{
+		timeSegments = timeStr.Split (':');
+		return timeSegments.Length == 3;
+	}
+}

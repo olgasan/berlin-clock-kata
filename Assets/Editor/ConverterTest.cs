@@ -36,6 +36,15 @@ namespace UnityTest
 			Assert.IsNotNull (receivedTime);
 		}
 
+		[Test]
+		public void EvenSecondsAreConvertedToY ()
+		{
+			string time = CreateTimeStr ("00", "00", "02");
+			BerlinTime receivedTime = converter.ToBerlinFormat (time);
+			
+			Assert.AreEqual ("Y", receivedTime.Second);
+		}
+
 		private string CreateTimeStr (string hour, string minute, string second)
 		{
 			string time = "{0}:{1}:{2}";
