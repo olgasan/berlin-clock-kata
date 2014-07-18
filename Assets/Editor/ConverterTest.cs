@@ -45,10 +45,20 @@ namespace UnityTest
 			Assert.AreEqual ("Y", receivedTime.Second);
 		}
 
+		[Test]
+		public void OddSecondsAreConvertedToO ()
+		{
+			string time = CreateTimeStr ("00", "00", "01");
+			BerlinTime receivedTime = converter.ToBerlinFormat (time);
+			
+			Assert.AreEqual ("O", receivedTime.Second);
+		}
+
 		private string CreateTimeStr (string hour, string minute, string second)
 		{
 			string time = "{0}:{1}:{2}";
 			return string.Format (time, hour, minute, second);
 		}
+
 	}
 }

@@ -15,5 +15,9 @@ public class BerlinTime
 		{
 			Second = "Y";
 		}
+		else
+		{
+			Second = "O";
+		}
 	}
 }
