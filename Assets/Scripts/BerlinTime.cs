@@ -7,6 +7,12 @@ public class BerlinTime
 		private set;
 	}
 
+	public string SingleMinute 
+	{
+		get;
+		private set;
+	}
+
 	public BerlinTime (FormattedTime formattedTime)
 	{
 		int seconds = 0;
@@ -19,5 +25,16 @@ public class BerlinTime
 		{
 			Second = "O";
 		}
+
+		int minutes = 0;
+		int.TryParse (formattedTime.Minutes, out minutes);
+
+		if(minutes == 1)
+		{
+			SingleMinute = "YOOO";
+		}
+
 	}
+
+
 }

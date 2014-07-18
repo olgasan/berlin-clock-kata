@@ -32,6 +32,7 @@
 public class FormattedTime
 {
 	private const int SECONDS = 2;
+	private const int MINUTES = 1;
 
 	private string timeStr;
 	private string[] timeSegments;
@@ -39,6 +40,11 @@ public class FormattedTime
 	public string Seconds 
 	{
 		get { return timeSegments [SECONDS]; }
+	}
+
+	public string Minutes 
+	{
+		get {return timeSegments [MINUTES]; }
 	}
 	
 	public FormattedTime (string timeStr)

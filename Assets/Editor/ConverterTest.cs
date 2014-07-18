@@ -54,6 +54,15 @@ namespace UnityTest
 			Assert.AreEqual ("O", receivedTime.Second);
 		}
 
+		[Test]
+		public void FormatSingleMinutesRow()
+		{
+			string time = CreateTimeStr("16", "01", "00");
+			BerlinTime receivedTime = converter.ToBerlinFormat (time);
+
+			Assert.AreEqual("YOOO", receivedTime.SingleMinute);
+		}
+
 		private string CreateTimeStr (string hour, string minute, string second)
 		{
 			string time = "{0}:{1}:{2}";
