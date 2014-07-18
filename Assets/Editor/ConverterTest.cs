@@ -6,10 +6,17 @@ namespace UnityTest
 	[TestFixture]
 	internal class ConverterTest
 	{
+		private Converter converter;
+
+		[SetUp]
+		public void SetUp ()
+		{
+			converter = new Converter ();
+		}
+
 		[Test]
 		public void CanBeCreated ()
 		{
-			Converter converter = new Converter ();
 			Assert.IsNotNull (converter);
 		}
 
@@ -17,23 +24,22 @@ namespace UnityTest
 		[ExpectedException]
 		public void RejectsInvalidFormat ()
 		{
-			Converter converter = new Converter ();
 			converter.ToBerlinFormat ("00-00-00");
 		}
 
 		[Test]
 		public void ReceivesTimeInFormatHHMMSS ()
 		{
-			Converter converter = new Converter ();
-
-			string h = "01";
-			string m = "02";
-			string s = "03";
-			string time = "{0}:{1}:{2}";
-			time = string.Format (time, h, m, s);
-
+			string time = CreateTimeStr ("00", "01", "02");
 			BerlinTime receivedTime = converter.ToBerlinFormat (time);
+
 			Assert.IsNotNull (receivedTime);
+		}
+
+		private string CreateTimeStr (string hour, string minute, string second)
+		{
+			string time = "{0}:{1}:{2}";
+			return string.Format (time, hour, minute, second);
 		}
 	}
 }
