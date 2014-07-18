@@ -61,6 +61,14 @@ namespace UnityTest
 			BerlinTime receivedTime = converter.ToBerlinFormat (time);
 
 			Assert.AreEqual("YOOO", receivedTime.SingleMinute);
+
+			time = CreateTimeStr("16", "02", "00");
+			receivedTime = converter.ToBerlinFormat (time);
+			Assert.AreEqual("YYOO", receivedTime.SingleMinute);
+
+			time = CreateTimeStr("16", "05", "00");
+			receivedTime = converter.ToBerlinFormat (time);
+			Assert.AreEqual("OOOO", receivedTime.SingleMinute);
 		}
 
 		private string CreateTimeStr (string hour, string minute, string second)

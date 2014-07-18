@@ -15,26 +15,55 @@ public class BerlinTime
 
 	public BerlinTime (FormattedTime formattedTime)
 	{
-		int seconds = 0;
-		int.TryParse (formattedTime.Seconds, out seconds);
-		if (seconds % 2 == 0)
-		{
-			Second = "Y";
-		}
-		else
-		{
-			Second = "O";
-		}
+		ParseSeconds (formattedTime);
 
-		int minutes = 0;
-		int.TryParse (formattedTime.Minutes, out minutes);
-
-		if(minutes == 1)
-		{
-			SingleMinute = "YOOO";
-		}
+		ParseMinutes (formattedTime);
 
 	}
 
 
+	private void ParseSeconds (FormattedTime formattedTime)
+	{
+		int seconds = 0;
+		int.TryParse (formattedTime.Seconds, out seconds);
+		if (seconds % 2 == 0) 
+		{
+			Second = "Y";
+		}
+		else 
+		{
+			Second = "O";
+		}
+	}
+
+	private void ParseMinutes (FormattedTime formattedTime)
+	{
+		int minutes = 0;
+		int.TryParse (formattedTime.Minutes, out minutes);
+		if(minutes < 5)
+			SingleMinute = JoinBlocks(ParseIntToBlocks(minutes));
+		else
+			SingleMinute = "OOOO";
+	}
+
+	private string[] ParseIntToBlocks(int value)
+	{
+		int numberOfBlocks = 4;
+		string[] blocks = new string[numberOfBlocks];
+	
+		for(int i = 0; i < blocks.Length; i++)
+		{
+			if(i < value )
+				blocks[i] = "Y";
+			else
+				blocks[i] = "O";
+		}
+
+		return blocks;
+ 	}
+
+	private string JoinBlocks(string[] blocks)
+	{
+		return string.Join("", blocks);
+	}
 }
