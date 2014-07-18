@@ -13,54 +13,69 @@ public class BerlinTime
 		private set;
 	}
 
-	public BerlinTime (FormattedTime formattedTime)
+	public string FiveMinute 
 	{
-		ParseSeconds (formattedTime);
-
-		ParseMinutes (formattedTime);
-
+		get;
+		private set;
 	}
 
+	public BerlinTime (FormattedTime formattedTime)
+	{
+		ParseSecondsRow (formattedTime);
+		ParseSingleMinutesRow (formattedTime);
+		ParseFiveMinutesRow (formattedTime);
+	}
 
-	private void ParseSeconds (FormattedTime formattedTime)
+	private void ParseSecondsRow (FormattedTime formattedTime)
 	{
 		int seconds = 0;
 		int.TryParse (formattedTime.Seconds, out seconds);
-		if (seconds % 2 == 0) 
-		{
-			Second = "Y";
-		}
-		else 
-		{
-			Second = "O";
-		}
+		Second = (seconds % 2 == 0) ? "Y" : "O";
 	}
 
-	private void ParseMinutes (FormattedTime formattedTime)
+	private void ParseSingleMinutesRow (FormattedTime formattedTime)
 	{
 		int minutes = 0;
 		int.TryParse (formattedTime.Minutes, out minutes);
+
 		if(minutes < 5)
-			SingleMinute = JoinBlocks(ParseIntToBlocks(minutes));
+			SingleMinute = JoinBlocks(ParseIntToBlocks(minutes, 4, 1));
 		else
 			SingleMinute = "OOOO";
 	}
 
-	private string[] ParseIntToBlocks(int value)
+	private void ParseFiveMinutesRow (FormattedTime formattedTime)
 	{
-		int numberOfBlocks = 4;
+		int minutes = 0;
+		int.TryParse (formattedTime.Minutes, out minutes);
+
+		if(minutes >= 5)
+			FiveMinute = JoinBlocks(ParseIntToBlocks(minutes, 11, 5));
+		else
+			FiveMinute = "OOOOOOOOOOO";
+	}
+
+
+	private string[] ParseIntToBlocks(int value, int numberOfBlocks, int blockSize)
+	{
+		int blocksOn = value/blockSize;
+		return SimpleParseIntToBlocks (blocksOn, numberOfBlocks, blockSize);
+ 	}
+
+	private string[] SimpleParseIntToBlocks(int value, int numberOfBlocks, int blockSize)
+	{
 		string[] blocks = new string[numberOfBlocks];
-	
+		
 		for(int i = 0; i < blocks.Length; i++)
 		{
-			if(i < value )
+			if(i < value)
 				blocks[i] = "Y";
 			else
 				blocks[i] = "O";
 		}
-
+		
 		return blocks;
- 	}
+	}
 
 	private string JoinBlocks(string[] blocks)
 	{
