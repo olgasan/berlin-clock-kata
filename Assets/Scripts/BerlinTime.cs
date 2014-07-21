@@ -54,8 +54,7 @@ public class BerlinTime
 		else
 			FiveMinute = "OOOOOOOOOOO";
 	}
-
-
+	
 	private string[] ParseIntToBlocks(int value, int numberOfBlocks, int blockSize)
 	{
 		int blocksOn = value/blockSize;
