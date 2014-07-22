@@ -37,24 +37,6 @@ namespace UnityTest
 		}
 
 		[Test]
-		public void EvenSecondsAreConvertedToY ()
-		{
-			string time = CreateTimeStr ("00", "00", "02");
-			BerlinTime receivedTime = converter.ToBerlinFormat (time);
-			
-			Assert.AreEqual ("Y", receivedTime.Second);
-		}
-
-		[Test]
-		public void OddSecondsAreConvertedToO ()
-		{
-			string time = CreateTimeStr ("00", "00", "01");
-			BerlinTime receivedTime = converter.ToBerlinFormat (time);
-			
-			Assert.AreEqual ("O", receivedTime.Second);
-		}
-
-		[Test]
 		public void FormatSingleMinutesRow()
 		{
 			string time = CreateTimeStr("16", "01", "00");

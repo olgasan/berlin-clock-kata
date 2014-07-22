@@ -1,6 +1,8 @@
 ﻿
 public class BerlinTime
 {
+	private BerlinSecondsRow secondsRow;
+
 	public string Second 
 	{
 		get;
@@ -21,6 +23,8 @@ public class BerlinTime
 
 	public BerlinTime (FormattedTime formattedTime)
 	{
+		secondsRow = new BerlinSecondsRow ();
+
 		ParseSecondsRow (formattedTime);
 		ParseSingleMinutesRow (formattedTime);
 		ParseFiveMinutesRow (formattedTime);
@@ -28,9 +32,7 @@ public class BerlinTime
 
 	private void ParseSecondsRow (FormattedTime formattedTime)
 	{
-		int seconds = 0;
-		int.TryParse (formattedTime.Seconds, out seconds);
-		Second = (seconds % 2 == 0) ? "Y" : "O";
+		Second = secondsRow.ToBerlinFormat (formattedTime.Seconds);
 	}
 
 	private void ParseSingleMinutesRow (FormattedTime formattedTime)
