@@ -24,5 +24,11 @@ namespace UnityTest
 		{
 			Assert.AreEqual ("YYROOOOOOOO", fiveMinutesRow.ToBerlinFormat ("15"));
 		}
+
+		[Test]
+		public void FormatFiftyFiveMinutes ()
+		{
+			Assert.AreEqual ("YYRYYRYYRYY", fiveMinutesRow.ToBerlinFormat ("55"));
+		}
 	}
 }
