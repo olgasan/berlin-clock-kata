@@ -3,7 +3,7 @@ public class BerlinTime
 {
 	private BerlinSecondsRow secondsRow;
 	private BerlinSingleMinutesRow singleMinutesRow;
-	private BlockParser blockParser;
+	private BerlinFiveMinutesRow fiveMinutesRow;
 
 	public string Second 
 	{
@@ -27,7 +27,7 @@ public class BerlinTime
 	{
 		secondsRow = new BerlinSecondsRow ();
 		singleMinutesRow = new BerlinSingleMinutesRow ();
-		blockParser = new BlockParser();
+		fiveMinutesRow = new BerlinFiveMinutesRow ();
 
 		ParseSecondsRow (formattedTime);
 		ParseSingleMinutesRow (formattedTime);
@@ -46,12 +46,6 @@ public class BerlinTime
 
 	private void ParseFiveMinutesRow (FormattedTime formattedTime)
 	{
-		int minutes = 0;
-		int.TryParse (formattedTime.Minutes, out minutes);
-
-		if(minutes >= 5)
-			FiveMinute = blockParser.GetBlocksFromInt(minutes, 11, 5);
-		else
-			FiveMinute = "OOOOOOOOOOO";
+		FiveMinute = fiveMinutesRow.ToBerlinFormat (formattedTime.Minutes);
 	}
 }

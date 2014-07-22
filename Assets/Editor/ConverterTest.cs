@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace UnityTest
 {
@@ -36,37 +35,10 @@ namespace UnityTest
 			Assert.IsNotNull (receivedTime);
 		}
 
-		[Test]
-		public void FormatSingleMinutesRow()
-		{
-			string time = CreateTimeStr("16", "01", "00");
-			BerlinTime receivedTime = converter.ToBerlinFormat (time);
-
-			Assert.AreEqual("YOOO", receivedTime.SingleMinute);
-
-			time = CreateTimeStr("16", "02", "00");
-			receivedTime = converter.ToBerlinFormat (time);
-			Assert.AreEqual("YYOO", receivedTime.SingleMinute);
-
-			time = CreateTimeStr("16", "05", "00");
-			receivedTime = converter.ToBerlinFormat (time);
-			Assert.AreEqual("OOOO", receivedTime.SingleMinute);
-		}
-
-		[Test]
-		public void FormatFiveMinutesRow()
-		{
-			string time = CreateTimeStr("16", "05", "00");
-			BerlinTime receivedTime = converter.ToBerlinFormat (time);
-			
-			Assert.AreEqual("YOOOOOOOOOO", receivedTime.FiveMinute);
-		}
-
 		private string CreateTimeStr (string hour, string minute, string second)
 		{
 			string time = "{0}:{1}:{2}";
 			return string.Format (time, hour, minute, second);
 		}
-
 	}
 }
