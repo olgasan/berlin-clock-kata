@@ -1,10 +1,12 @@
 ﻿public class BerlinFiveMinutesRow
 {
+	private const int MARKER_INTERVAL = 3;
+
 	private BlockParser blockParser;
 
 	public BerlinFiveMinutesRow ()
 	{
-		blockParser = new BlockParser ();
+		blockParser = new BlockParser (MARKER_INTERVAL);
 	}
 
 	public string ToBerlinFormat (string minutesStr)
