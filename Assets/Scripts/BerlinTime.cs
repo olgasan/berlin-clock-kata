@@ -2,6 +2,8 @@
 public class BerlinTime
 {
 	private BerlinSecondsRow secondsRow;
+	private BerlinSingleMinutesRow singleMinutesRow;
+	private BlockParser blockParser;
 
 	public string Second 
 	{
@@ -24,6 +26,8 @@ public class BerlinTime
 	public BerlinTime (FormattedTime formattedTime)
 	{
 		secondsRow = new BerlinSecondsRow ();
+		singleMinutesRow = new BerlinSingleMinutesRow ();
+		blockParser = new BlockParser();
 
 		ParseSecondsRow (formattedTime);
 		ParseSingleMinutesRow (formattedTime);
@@ -37,13 +41,7 @@ public class BerlinTime
 
 	private void ParseSingleMinutesRow (FormattedTime formattedTime)
 	{
-		int minutes = 0;
-		int.TryParse (formattedTime.Minutes, out minutes);
-
-		if(minutes < 5)
-			SingleMinute = JoinBlocks(ParseIntToBlocks(minutes, 4, 1));
-		else
-			SingleMinute = "OOOO";
+		SingleMinute = singleMinutesRow.ToBerlinFormat(formattedTime.Minutes);
 	}
 
 	private void ParseFiveMinutesRow (FormattedTime formattedTime)
@@ -52,34 +50,8 @@ public class BerlinTime
 		int.TryParse (formattedTime.Minutes, out minutes);
 
 		if(minutes >= 5)
-			FiveMinute = JoinBlocks(ParseIntToBlocks(minutes, 11, 5));
+			FiveMinute = blockParser.GetBlocksFromInt(minutes, 11, 5);
 		else
 			FiveMinute = "OOOOOOOOOOO";
-	}
-	
-	private string[] ParseIntToBlocks(int value, int numberOfBlocks, int blockSize)
-	{
-		int blocksOn = value/blockSize;
-		return SimpleParseIntToBlocks (blocksOn, numberOfBlocks, blockSize);
- 	}
-
-	private string[] SimpleParseIntToBlocks(int value, int numberOfBlocks, int blockSize)
-	{
-		string[] blocks = new string[numberOfBlocks];
-		
-		for(int i = 0; i < blocks.Length; i++)
-		{
-			if(i < value)
-				blocks[i] = "Y";
-			else
-				blocks[i] = "O";
-		}
-		
-		return blocks;
-	}
-
-	private string JoinBlocks(string[] blocks)
-	{
-		return string.Join("", blocks);
 	}
 }
