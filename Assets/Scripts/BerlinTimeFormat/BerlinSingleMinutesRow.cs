@@ -4,7 +4,7 @@
 
 	public BerlinSingleMinutesRow()
 	{
-		blockParser = new BlockParser();
+		blockParser = new BlockParser("Y");
 	}
 
 	public string ToBerlinFormat(string minutesStr)

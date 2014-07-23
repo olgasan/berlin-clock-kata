@@ -6,7 +6,7 @@
 
 	public BerlinFiveMinutesRow ()
 	{
-		blockParser = new BlockParser (MARKER_INTERVAL);
+		blockParser = new BlockParser ("Y", "R", MARKER_INTERVAL);
 	}
 
 	public string ToBerlinFormat (string minutesStr)

@@ -1,19 +1,30 @@
 ﻿public class BlockParser
 {
 	private int markerInterval;
+	private string turnedOffStr;
+	private string turnedOnStr;
+	private string markerStr;
+
+	private char CharForTurnedOn
+	{
+		get { return turnedOnStr[0]; }
+	}
 
 	private bool ShouldAddMarkers
 	{
 		get { return (markerInterval > 0); }
 	}
 
-	public BlockParser ()
+	public BlockParser (string charForTurnedOn)
 	{
+		this.turnedOffStr = "O";
+		this.turnedOnStr = charForTurnedOn;
 		markerInterval = int.MinValue;
 	}
 
-	public BlockParser (int markerInterval)
+	public BlockParser (string charForTurnedOn, string charForMarker, int markerInterval) : this (charForTurnedOn)
 	{
+		this.markerStr = charForMarker;
 		this.markerInterval = markerInterval;
 	}
 
@@ -39,13 +50,13 @@
 		{
 			bool isMarkerChar = false;
 			
-			if (joinedBlocks[i] == 'Y')
+			if (joinedBlocks[i] == CharForTurnedOn)
 			{
 				isMarkerChar = (markerCount >= interval);
 				markerCount = (markerCount >= interval) ? 0 : (markerCount + 1);
 			}
 
-			modifiedBlocks = isMarkerChar ? (modifiedBlocks + "R") : (modifiedBlocks + joinedBlocks[i]);
+			modifiedBlocks = isMarkerChar ? (modifiedBlocks + markerStr) : (modifiedBlocks + joinedBlocks[i]);
 		}
 
 		return modifiedBlocks;
@@ -69,9 +80,9 @@
 		for(int i = 0; i < blocks.Length; i++)
 		{
 			if(i < value)
-				blocks[i] = "Y";
+				blocks[i] = turnedOnStr;
 			else
-				blocks[i] = "O";
+				blocks[i] = turnedOffStr;
 		}
 		
 		return blocks;
