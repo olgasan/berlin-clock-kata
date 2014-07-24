@@ -1,14 +1,20 @@
-﻿public class BerlinSecondsRow
+﻿public class BerlinSecondsRow : BerlinRow
 {
-	public string ToBerlinFormat (string secondsStr)
+	protected override int NumberOfBlocks {	get {return 1;} }
+	protected override int NumberOfUnitsPerBlock { get {return 1;} }
+	
+	public BerlinSecondsRow()
 	{
-		return ParseSecondsRow (secondsStr);
+		blockParser = new BlockParser("Y");
 	}
 
-	private string ParseSecondsRow (string secondsStr)
+	protected override bool ShouldBeEmpty (int value)
 	{
-		int seconds = 0;
-		int.TryParse (secondsStr, out seconds);
-		return (seconds % 2 == 0) ? "Y" : "O";
+		return !(value % 2 == 0);
+	}
+
+	public override string ToBerlinFormat (string secondsStr)
+	{
+		return ParseTimeRow (secondsStr);
 	}
 }

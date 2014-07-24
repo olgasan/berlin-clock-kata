@@ -1,28 +1,20 @@
-﻿public class BerlinSingleMinutesRow  
+﻿public class BerlinSingleMinutesRow : BerlinRow
 {
-	private BlockParser blockParser;
+	protected override int NumberOfBlocks {	get {return 4;} }
+	protected override int NumberOfUnitsPerBlock { get {return 1;} }
+
+	protected override bool ShouldBeEmpty (int value)
+	{
+		return !(value <= NumberOfBlocks);
+	}
 
 	public BerlinSingleMinutesRow()
 	{
 		blockParser = new BlockParser("Y");
 	}
 
-	public string ToBerlinFormat(string minutesStr)
+	public override string ToBerlinFormat(string minutesStr)
 	{
-		return ParseSingleMinutesRow(minutesStr);
+		return ParseTimeRow(minutesStr);
 	}
-
-	private string ParseSingleMinutesRow (string minutesStr)
-	{
-		int minutes = 0;
-		int.TryParse (minutesStr, out minutes);
-		
-		if(minutes < 5)
-			return blockParser.GetBlocksFromInt(minutes, 4, 1);
-		else
-			return "OOOO";
-	}
-
-
-
 }

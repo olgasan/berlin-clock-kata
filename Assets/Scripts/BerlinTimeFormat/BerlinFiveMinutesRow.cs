@@ -1,27 +1,22 @@
-﻿public class BerlinFiveMinutesRow
+﻿public class BerlinFiveMinutesRow : BerlinRow
 {
 	private const int MARKER_INTERVAL = 3;
 
-	private BlockParser blockParser;
+	protected override int NumberOfBlocks {	get {return 11;} }
+	protected override int NumberOfUnitsPerBlock { get {return 5;} }
 
 	public BerlinFiveMinutesRow ()
 	{
 		blockParser = new BlockParser ("Y", "R", MARKER_INTERVAL);
 	}
 
-	public string ToBerlinFormat (string minutesStr)
+	protected override bool ShouldBeEmpty (int value)
 	{
-		return ParseFiveMinutesRow (minutesStr);
+		return !(value >= NumberOfUnitsPerBlock );
 	}
 
-	private string ParseFiveMinutesRow (string minutesStr)
+	public override string ToBerlinFormat (string minutesStr)
 	{
-		int minutes = 0;
-		int.TryParse (minutesStr, out minutes);
-		
-		if(minutes >= 5)
-			return blockParser.GetBlocksFromInt(minutes, 11, 5);
-		else
-			return "OOOOOOOOOOO";
-	}
+		return ParseTimeRow (minutesStr);
+	}	
 }
