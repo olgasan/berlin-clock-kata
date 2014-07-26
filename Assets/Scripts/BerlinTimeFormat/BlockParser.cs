@@ -28,13 +28,18 @@
 		this.markerInterval = markerInterval;
 	}
 
-	public string GetBlocksFromInt(int value, int numberOfBlocks, int size)
+	public string GetBlocksFromInt(int value, int numberOfBlocks, int size, bool includeZero)
 	{
-		string[] blocks = IntToBlocksGroups(value, numberOfBlocks, size);
+		string[] blocks = IntToBlocksGroups(value, numberOfBlocks, size, includeZero);
 		string joinedBlocks = JoinBlocks (blocks);
 		string formattedStr = AddMarkers (joinedBlocks);
-
+		
 		return formattedStr;
+	}
+
+	public string GetBlocksFromInt(int value, int numberOfBlocks, int size)
+	{
+		return GetBlocksFromInt (value, numberOfBlocks, size, false);
 	}
 
 	private string AddMarkers (string joinedBlocks)
@@ -67,19 +72,19 @@
 		return string.Join("", blocks);
 	}
 
-	private string[] IntToBlocksGroups(int value, int numberOfBlocks, int blockSize)
+	private string[] IntToBlocksGroups(int value, int numberOfBlocks, int blockSize, bool includeZero)
 	{
 		int blocksOn = value/blockSize;
-		return IntToBlocks (blocksOn, numberOfBlocks, blockSize);
+		return IntToBlocks (blocksOn, numberOfBlocks, blockSize, includeZero);
 	}
 	
-	private string[] IntToBlocks(int value, int numberOfBlocks, int blockSize)
+	private string[] IntToBlocks(int value, int numberOfBlocks, int blockSize, bool includeZero)
 	{
 		string[] blocks = new string[numberOfBlocks];
 		
 		for(int i = 0; i < blocks.Length; i++)
 		{
-			if(i < value)
+			if(i < value || (includeZero && value==0))
 				blocks[i] = turnedOnStr;
 			else
 				blocks[i] = turnedOffStr;

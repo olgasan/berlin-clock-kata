@@ -17,4 +17,12 @@
 	{
 		return ParseTimeRow (secondsStr);
 	}
+
+	protected override string GetBlocksFromInt (int value)
+	{
+		if (value == 0)
+			return blockParser.GetBlocksFromInt (value, NumberOfBlocks, NumberOfUnitsPerBlock, true);
+
+		return base.GetBlocksFromInt (value);
+	}
 }

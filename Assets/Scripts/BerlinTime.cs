@@ -9,7 +9,7 @@ public class BerlinTime
 	private BerlinSingleHourRow singleHourRow;
 	private BerlinFiveHourRow fiveHourRow;
 
-	public string Second 
+	public string SecondsRow 
 	{
 		get { return secondsRow.ToBerlinFormat (formattedTime.Seconds); }
 	}

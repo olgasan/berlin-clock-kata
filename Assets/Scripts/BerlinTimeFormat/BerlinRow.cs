@@ -23,12 +23,12 @@
 
 	protected string GetEmptyRow()
 	{
-		return blockParser.GetBlocksFromInt(0,NumberOfBlocks,NumberOfUnitsPerBlock);
+		return blockParser.GetBlocksFromInt (0, NumberOfBlocks, NumberOfUnitsPerBlock);
 	}
 
-	protected string GetBlocksFromInt(int value)
+	protected virtual string GetBlocksFromInt(int value)
 	{
-		return blockParser.GetBlocksFromInt(value, NumberOfBlocks, NumberOfUnitsPerBlock);
+		return blockParser.GetBlocksFromInt (value, NumberOfBlocks, NumberOfUnitsPerBlock);
 	}
 
 	protected string ParseTimeRow (string valueStr)
