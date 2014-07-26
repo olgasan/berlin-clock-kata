@@ -18,5 +18,17 @@ namespace UnityTest
 		{
 			Assert.AreEqual ("ROOO", singleHourRow.ToBerlinFormat ("01"));
 		}
+
+		[Test]
+		public void FormatTwoHours ()
+		{
+			Assert.AreEqual ("RROO", singleHourRow.ToBerlinFormat ("02"));
+		}
+
+		[Test]
+		public void FormatFiveHours ()
+		{
+			Assert.AreEqual ("OOOO", singleHourRow.ToBerlinFormat ("05"));
+		}
 	}
 }
