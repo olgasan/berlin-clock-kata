@@ -16,6 +16,11 @@
 		return v;
 	}
 
+	protected string ConvertToString (int value)
+	{
+		return value > 9 ? value.ToString () : "0"+value;
+	}
+
 	protected string GetEmptyRow()
 	{
 		return blockParser.GetBlocksFromInt(0,NumberOfBlocks,NumberOfUnitsPerBlock);

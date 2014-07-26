@@ -16,6 +16,17 @@
 
 	public override string ToBerlinFormat (string hourStr)
 	{
+		int hours = ConvertToInt (hourStr);
+		int limit = NumberOfBlocks + 1;
+		if (hours > NumberOfBlocks)
+		{
+			int multiplier = hours / limit;
+			int difference = (multiplier * limit);
+			hours = hours - difference;
+
+			hourStr = ConvertToString (hours);
+		}
+
 		return ParseTimeRow (hourStr);
 	}
 }

@@ -33,28 +33,23 @@ public class FormattedTime
 {
 	private const int SECONDS = 2;
 	private const int MINUTES = 1;
+	private const int HOURS = 0;
 
 	private string timeStr;
 	private string[] timeSegments;
 
-	public string Seconds 
-	{
-		get { return timeSegments [SECONDS]; }
-	}
+	public string Seconds { get { return timeSegments [SECONDS]; } }
+	public string Minutes { get {return timeSegments [MINUTES]; } }
+	public string Hours { get { return string.IsNullOrEmpty (timeSegments [HOURS]) ? "00" : timeSegments [HOURS]; } }
 
-	public string Minutes 
-	{
-		get {return timeSegments [MINUTES]; }
-	}
-	
 	public FormattedTime (string timeStr)
 	{
 		this.timeStr = timeStr;
+		timeSegments = timeStr.Split (':');
 	}
 	
 	public bool IsValidFormat ()
 	{
-		timeSegments = timeStr.Split (':');
 		return timeSegments.Length == 3;
 	}
 }

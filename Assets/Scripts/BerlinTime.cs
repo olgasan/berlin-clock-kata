@@ -1,51 +1,53 @@
 ﻿
 public class BerlinTime
 {
+	private FormattedTime formattedTime;
+
 	private BerlinSecondsRow secondsRow;
 	private BerlinSingleMinutesRow singleMinutesRow;
 	private BerlinFiveMinutesRow fiveMinutesRow;
+	private BerlinSingleHourRow singleHourRow;
+	private BerlinFiveHourRow fiveHourRow;
 
 	public string Second 
 	{
-		get;
-		private set;
+		get { return secondsRow.ToBerlinFormat (formattedTime.Seconds); }
 	}
 
 	public string SingleMinute 
 	{
-		get;
-		private set;
+		get { return singleMinutesRow.ToBerlinFormat(formattedTime.Minutes); }
 	}
 
 	public string FiveMinute 
 	{
-		get;
-		private set;
+		get { return fiveMinutesRow.ToBerlinFormat (formattedTime.Minutes); }
+	}
+
+	public string FiveHourRow 
+	{
+		get { return fiveHourRow.ToBerlinFormat (formattedTime.Hours); }
+	}
+
+	public string SingleHourRow 
+	{
+		get { return singleHourRow.ToBerlinFormat (formattedTime.Hours); }
 	}
 
 	public BerlinTime (FormattedTime formattedTime)
 	{
+		this.formattedTime = formattedTime;
+
 		secondsRow = new BerlinSecondsRow ();
 		singleMinutesRow = new BerlinSingleMinutesRow ();
 		fiveMinutesRow = new BerlinFiveMinutesRow ();
 
-		ParseSecondsRow (formattedTime);
-		ParseSingleMinutesRow (formattedTime);
-		ParseFiveMinutesRow (formattedTime);
+		FormatHours ();
 	}
 
-	private void ParseSecondsRow (FormattedTime formattedTime)
+	public void FormatHours ()
 	{
-		Second = secondsRow.ToBerlinFormat (formattedTime.Seconds);
-	}
-
-	private void ParseSingleMinutesRow (FormattedTime formattedTime)
-	{
-		SingleMinute = singleMinutesRow.ToBerlinFormat(formattedTime.Minutes);
-	}
-
-	private void ParseFiveMinutesRow (FormattedTime formattedTime)
-	{
-		FiveMinute = fiveMinutesRow.ToBerlinFormat (formattedTime.Minutes);
+		singleHourRow = new BerlinSingleHourRow ();
+		fiveHourRow = new BerlinFiveHourRow ();
 	}
 }
