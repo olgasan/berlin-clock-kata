@@ -40,4 +40,21 @@
 		else
 			return GetBlocksFromInt(value);
 	}
+
+	protected string RemoveDifference (string valueStr)
+	{
+		int value = ConvertToInt (valueStr);
+		int limit = NumberOfBlocks + 1;
+		
+		if (value > NumberOfBlocks)
+		{
+			int multiplier = value / limit;
+			int difference = (multiplier * limit);
+			value = value - difference;
+			
+			valueStr = ConvertToString (value);
+		}
+		
+		return valueStr;
+	}
 }

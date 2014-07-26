@@ -14,12 +14,12 @@ public class BerlinTime
 		get { return secondsRow.ToBerlinFormat (formattedTime.Seconds); }
 	}
 
-	public string SingleMinute 
+	public string SingleMinuteRow 
 	{
 		get { return singleMinutesRow.ToBerlinFormat(formattedTime.Minutes); }
 	}
 
-	public string FiveMinute 
+	public string FiveMinuteRow 
 	{
 		get { return fiveMinutesRow.ToBerlinFormat (formattedTime.Minutes); }
 	}

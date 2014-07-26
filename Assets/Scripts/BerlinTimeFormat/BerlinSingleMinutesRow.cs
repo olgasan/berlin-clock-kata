@@ -15,6 +15,7 @@
 
 	public override string ToBerlinFormat(string minutesStr)
 	{
+		minutesStr = RemoveDifference (minutesStr);
 		return ParseTimeRow(minutesStr);
 	}
 }

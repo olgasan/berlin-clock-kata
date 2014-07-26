@@ -14,19 +14,9 @@
 		return !(value <= NumberOfBlocks);
 	}
 
-	public override string ToBerlinFormat (string hourStr)
+	public override string ToBerlinFormat (string hoursStr)
 	{
-		int hours = ConvertToInt (hourStr);
-		int limit = NumberOfBlocks + 1;
-		if (hours > NumberOfBlocks)
-		{
-			int multiplier = hours / limit;
-			int difference = (multiplier * limit);
-			hours = hours - difference;
-
-			hourStr = ConvertToString (hours);
-		}
-
-		return ParseTimeRow (hourStr);
+		hoursStr = RemoveDifference (hoursStr);
+		return ParseTimeRow (hoursStr);
 	}
 }
